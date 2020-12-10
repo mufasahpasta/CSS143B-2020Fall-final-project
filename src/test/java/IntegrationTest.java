@@ -119,4 +119,62 @@ public class IntegrationTest {
             this.expect = expect;
         }
     }
+
+    @Test
+    public void testIntegrationExtraCredit() {
+        List<TestCase> cases = getTestCaseExtraCredit();
+        for (TestCase testCase : cases) {
+            List<Integer> actual = searcher.search(
+                    testCase.target,
+                    indexer.index(testCase.documents)
+            );
+            assertEquals(testCase.expect, actual);
+        }
+    }
+
+    private List<TestCase> getTestCaseExtraCredit() {
+        List<String> documents = Util.getDocumentsForIntTestExtraCredit();
+
+        List<TestCase> testCases = new ArrayList<>(Arrays.asList(
+                new TestCase(
+                        documents,
+                        "yel",
+                        Util.emptyResult()
+                ),
+                new TestCase(
+                        documents,
+                        "yellow",
+                        new ArrayList<>(Arrays.asList(0, 3, 4))
+                ),
+                new TestCase(
+                        documents,
+                        "ca",
+                        Util.emptyResult()
+                ),
+                new TestCase(
+                        documents,
+                        "are yo",
+                        Util.emptyResult()
+                ),
+                new TestCase(
+                        documents,
+                        "how are you",
+                        new ArrayList<>(Arrays.asList(3))
+                )
+        ));
+
+        return testCases;
+    }
+
+    private class TestCaseExtraCredit {
+        private List<String> documents;
+        private String target;
+        private List<Integer> expect;
+
+        public TestCaseExtraCredit(List<String> documents, String target, List<Integer> expect) {
+            this.documents = documents;
+            this.target = target;
+            this.expect = expect;
+        }
+    }
 }

@@ -126,6 +126,16 @@ public class Util {
                 )
         );
     }
+    public static List<String> getDocumentsForIntTestExtraCredit() {
+        return new ArrayList<>(
+                Arrays.asList(
+                        "the car is yellow",
+                        "today is thursday",
+                        "hi",
+                        "hi how are you yellow",
+                        "thursday yellow thursday car today"
+        ));
+    }
 
     public static List<Integer> emptyResult() {
         return new ArrayList<>();
